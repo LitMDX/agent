@@ -12,13 +12,8 @@ concurrency:
 
 jobs:
   build-and-test:
-    name: Node ${{ matrix.node }} — ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        node: [18, 20, 22]
-        os: [ubuntu-latest]
+    name: Lint, Typecheck, Build & Test
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -29,10 +24,10 @@ jobs:
         with:
           run_install: false
 
-      - name: Setup Node ${{ matrix.node }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
