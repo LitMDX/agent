@@ -57,9 +57,10 @@ describe("RetryPlugin", () => {
     logs = [];
   });
 
-  afterEach(() => {
+  afterEach(async () => {
+    await vi.runAllTimersAsync();
     vi.useRealTimers();
-  });
+  }, 30_000);
 
   /** Fire an AfterModelCallEvent with an optional error and return the mutable event. */
   function fireAfterModel(error?: Error) {
