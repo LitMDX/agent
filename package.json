@@ -1,6 +1,6 @@
 {
   "name": "@litmdx/agent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Strands-powered documentation agent for LitMDX.",
   "license": "Apache-2.0",
   "type": "module",
@@ -28,6 +28,10 @@
     "./indexer": {
       "import": "./dist/indexer/index.js",
       "types": "./dist/indexer/index.d.ts"
+    },
+    "./tools/context7": {
+      "import": "./dist/tools/context7.js",
+      "types": "./dist/tools/context7.d.ts"
     }
   },
   "files": [
