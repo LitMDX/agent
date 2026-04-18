@@ -1,0 +1,97 @@
+{
+  "name": "@litmdx/agent",
+  "version": "0.1.0",
+  "description": "Strands-powered documentation agent for LitMDX.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./adapters/node-http": {
+      "import": "./dist/adapters/node-http/index.js",
+      "types": "./dist/adapters/node-http/index.d.ts"
+    },
+    "./adapters/lambda": {
+      "import": "./dist/adapters/lambda/index.js",
+      "types": "./dist/adapters/lambda/index.d.ts"
+    },
+    "./adapters/hono": {
+      "import": "./dist/adapters/hono/index.js",
+      "types": "./dist/adapters/hono/index.d.ts"
+    },
+    "./vite": {
+      "import": "./dist/vite-plugin/index.js",
+      "types": "./dist/vite-plugin/index.d.ts"
+    },
+    "./indexer": {
+      "import": "./dist/indexer/index.js",
+      "types": "./dist/indexer/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "litmdx-agent": "dist/bin/server.js",
+    "litmdx-build-index": "dist/bin/build-index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:index": "node dist/bin/build-index.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "dev:server": "node --env-file-if-exists=.env --watch dist/bin/server.js",
+    "start": "node --env-file-if-exists=.env dist/bin/server.js",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@strands-agents/sdk": "^1.0.0-rc.3",
+    "openai": "^6.34.0",
+    "zod": "^4.1.12"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-lambda": "^3",
+    "@aws-sdk/client-s3": "^3",
+    "hono": "^4",
+    "vite": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "@aws-sdk/client-s3": {
+      "optional": true
+    },
+    "@aws-sdk/client-lambda": {
+      "optional": true
+    },
+    "hono": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.0",
+    "@types/node": "^25.5.0",
+    "eslint": "^10.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "hono": "^4.7.0",
+    "prettier": "^3.8.3",
+    "typescript": "~5.9.0",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^7.0.0",
+    "vitest": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be"
+}
